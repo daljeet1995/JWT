@@ -90,8 +90,10 @@
      // function four close
 
       // function five open
-    public function returnResponse(){
-        
+    public function returnResponse($code, $data){
+        header("content-type: application/json");
+        $response = json_encode(['response' => ['status' => $code, "result " => $data]]);
+        echo $response;exit;
     } 
     // function five close
 
