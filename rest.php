@@ -19,9 +19,18 @@
       if($_SERVER['CONTENT_TYPE'] !== 'application/json'){
           $this->throwError(REQUEST_CONTENTTYPE_NOT_VALID,'Request content type is not valid'); 
       }
-      
+
        $data = json_decode($this->request, true);
-       print_r($data);
+       
+       if(!isset($data['name']) || $data['name'] == ""){
+           $this->throwError(API_NAME_REQUIRED, "API name is required.");
+       }
+        $this->serviceName = $data['name'];
+
+        if(!is_array($data['param'])){
+            $this->throwError(API_NAME_REQUIRED, "API PARAM is required.");
+        }
+         $this->param = $data['param'];
     }
 
     public function processApi(){
